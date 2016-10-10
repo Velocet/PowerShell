@@ -31,8 +31,8 @@ function Get-SMART {
       Get's the S.M.A.R.T values for all devices and prints it as a nice table.
 
       .NOTES
-      smartmontools (smartctl) needs to be installed and available via the PATH variable.
-      smartmontools could obtained on Windows via Chocolatey (choco install smartmontools), from smartmontools.org or your preferred package manager on Linux/macOS.
+      smartmontools (smartctl) needs to be installed in the standard path under Windows.
+      smartmontools could be obtained via Chocolatey (choco install smartmontools) on Windows, from smartmontools.org or your preferred package manager on Linux/macOS.
 
       .LINK
       https://github.com/velocet/PowerShell/blob/master/Velocet/Scripts/Wrapper-smartctl.ps1
@@ -72,7 +72,7 @@ function Get-SMART {
   return $result
 }
 
-function Invoke-ScanForDevices {
+function Invoke-SMARTScan {
   <#
       .SYNOPSIS
       Get all devices known to smartctl.
@@ -93,8 +93,8 @@ function Invoke-ScanForDevices {
       Get's the S.M.A.R.T values for all devices and prints it as a nice table.
 
       .NOTES
-      smartmontools (smartctl) needs to be installed and available via the PATH variable.
-      smartmontools could obtained on Windows via Chocolatey (choco install smartmontools), from smartmontools.org or your preferred package manager on Linux/macOS.
+      smartmontools (smartctl) needs to be installed in the standard path under Windows.
+      smartmontools could obtained via Chocolatey (choco install smartmontools) on Windows, from smartmontools.org or your preferred package manager on Linux/macOS.
 
       .LINK
       https://github.com/velocet/PowerShell/blob/master/Velocet/Scripts/Wrapper-smartctl.ps1
@@ -108,7 +108,7 @@ function Invoke-ScanForDevices {
   } # Windows
   else {
     $Scan = & smartctl --scan
-  } # Obscure other OS
+  } # flightless bird / macOS
   
   $Devices = @()
   foreach ($Device in $Scan) {

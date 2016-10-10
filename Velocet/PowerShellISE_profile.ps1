@@ -34,8 +34,9 @@ $env:GITHUB_TOKEN = '01469e0dbb22af1bb40123f7a413b50987eb5fab'
 #region Variables
 # Set User Profile and Supporting (Scripts, Modules, etc.) Paths
 # User variables are prefixed with 'PSUser'
-$PSUser            = Split-Path -Path $profile -Parent
-$PSUser            = "$PSUser\$PSUserName"  # User Directory Path
+$PSUser            = [Environment]::GetFolderPath(“MyDocuments”)+"\GitHub\PowerShell\$env:USERNAME"
+#$PSUser            = Split-Path -Path $profile -Parent
+#$PSUser            = "$PSUser\$PSUserName"  # User Directory Path
 $PSUserLogs        = "$PSUser\Logs"       # User Logs Path
 $PSUserModules     = "$PSUser\Modules"    # User Modules Path
 $PSUserScripts     = "$PSUser\Scripts"    # User Scripts Path
@@ -45,7 +46,7 @@ $PSUserProfile     = $PSCommandPath                     # User Profile (normally
 $PSModulePath      = "$PSUserModules;$env:PSModulePath" # Add User Modules Path
 $PsGetDestinationModulePath    = $PSUserModules         # Install modules in $PSUserModules by default (PsGet)
 $PSModuleAutoLoadingPreference = 'All'                  # Module auto-loading preference
-$ISESteroidsPath   = "$PSUser\ISESteroids"
+#$ISESteroidsPath   = "$PSUser\ISESteroids"
 $PSUserOneDrive    = Get-ItemPropertyValue -Path 'HKCU:\Software\Microsoft\OneDrive' -Name 'UserFolder'
 
 #region PSDefaultParameterValues
@@ -129,10 +130,7 @@ if ($LoadGit) {
   
   # GitHub  
   if (Test-Path -Path "$env:LOCALAPPDATA\GitHub\shell.ps1") {
-    $PoshGit = Split-Path -Path (Get-Module -Name 'PoSh-Git').Path -Parent
-    $env:github_posh_git = $PoshGit        # Needed for GitHub profile/shell.ps1
     . "$env:LOCALAPPDATA\GitHub\shell.ps1" # Load GitHub shell script
-    $env:github_posh_git = $PoshGit        # Overwrite if set wrong by GitHub
   }
 } # Git
 #endregion Modules
@@ -189,7 +187,7 @@ filter unlike( $glob ) { if (-not ($_.tostring() -like $glob)) { $_ } } # behave
 #region ISESteroids
 if ($ISESteroidsOnLoad) {
 
-  Import-Module -Name $ISESteroidsPath
+  Import-Module -Name ISESteroids
 
   if ($ISESteroidsOnDemand -eq $true) { 
     Write-Output -InputObject '[ISESteroids] Press CTRL + F12 to launch.'

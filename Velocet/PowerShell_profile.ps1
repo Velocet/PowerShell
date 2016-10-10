@@ -80,8 +80,9 @@ $env:GITHUB_TOKEN = '01469e0dbb22af1bb40123f7a413b50987eb5fab'
 
 # Set User Profile and supporting (Scripts, Modules, etc.) Paths
 # Personal variables are prefixed with 'PSUser'
-$PSUser            = Split-Path -Path $profile -Parent
-$PSUser            = "$PSUser\$PSUserName" # User Directory Path
+$PSUser            = [Environment]::GetFolderPath(“MyDocuments”)+"\GitHub\PowerShell\$env:USERNAME"
+#$PSUser            = Split-Path -Path $profile -Parent
+#$PSUser            = "$PSUser\$PSUserName" # User Directory Path
 $PSUserInitialize  = "$PSUser\Initialize"  # User Initialize Path
 $PSUserLogs        = "$PSUser\Logs"        # User Logs Path
 $PSUserModules     = "$PSUser\Modules"     # User Modules Path
@@ -192,13 +193,12 @@ if ($LoadGit) {
   $null = New-PSDrive -Name 'Git' -PSProvider FileSystem -Root $PSUserGit -Description 'Git Root Folder'
   
   # PoSh-Git
-  $PoshGit = "$PSUserModules\PoSh-Git"
-  Import-Module -Name $PoshGit
+  #$PoshGit = "$PSUserModules\PoSh-Git"
+  Import-Module -Name 'PoSh-Git'
   #Start-SshAgent -Quiet
   
   # GitHub  
   if (Test-Path -Path "$env:LOCALAPPDATA\GitHub\shell.ps1") {
-    $env:github_posh_git = $PoshGit        # Needed for GitHub profile/shell.ps1
     . "$env:LOCALAPPDATA\GitHub\shell.ps1" # Load GitHub shell script
     $env:github_posh_git = $PoshGit        # Overwrite if set wrong by GitHub
   }

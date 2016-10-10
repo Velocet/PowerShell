@@ -53,6 +53,7 @@
 <# ToDo
     TryCatch Block aus Process raus und um Beginn/Process/End
     http://community.idera.com/powershell/powershell_com_featured_blogs/
+	http://9to5it.com/powershell-script-template-version-2/
 #># ToDo
 
 <# Performance
