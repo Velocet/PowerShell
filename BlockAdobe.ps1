@@ -46,5 +46,5 @@ function New-NetFirewallAppRule {
 # Delete old rules before creating new
 Get-NetFirewallApplicationFilter -Program "*\Adobe\*" -PolicyStore ActiveStore | Remove-NetFirewallRule
 
-New-NetFirewallAppRule -dir ("$env:ProgramFiles" + "\Adobe\") -group "Adobe"
-New-NetFirewallAppRule -dir ("$env:ProgramFiles(x86)" + "\Adobe\") -group "Adobe"
+New-NetFirewallAppRule -dir $("$env:ProgramFiles"+'\Adobe\') -group "Adobe"
+New-NetFirewallAppRule -dir $(${env:ProgramFiles(x86)}+'\Adobe') -group "Adobe"
