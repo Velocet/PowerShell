@@ -1,0 +1,47 @@
+﻿<#
+    function Get-LineAt ([String] $path, [Int32] $index)
+    {
+    # via http://stackoverflow.com/a/14776762/6813931
+    [System.IO.FileMode] $mode = [System.IO.FileMode]::Open;
+    [System.IO.FileAccess] $access = [System.IO.FileAccess]::Read;
+    [System.IO.FileShare] $share = [System.IO.FileShare]::Read;
+    [Int32] $bufferSize = 16 * 1024;
+    [System.IO.FileOptions] $options = [System.IO.FileOptions]::SequentialScan;
+    [System.Text.Encoding] $defaultEncoding = [System.Text.Encoding]::UTF8;
+    # FileStream(String, FileMode, FileAccess, FileShare, Int32, FileOptions) constructor
+    # http://msdn.microsoft.com/library/d0y914c5.aspx
+    [System.IO.FileStream] $file = New-Object -TypeName 'System.IO.FileStream' -ArgumentList ($path, $mode, $access, $share, $bufferSize, $options);
+    # StreamReader(Stream, Encoding, Boolean, Int32) constructor
+    # http://msdn.microsoft.com/library/ms143458.aspx
+    [System.IO.StreamReader] $reader = New-Object -TypeName 'System.IO.StreamReader' -ArgumentList ($file, $defaultEncoding, $true, $bufferSize);
+    [String] $line = $null;
+    [Int32] $currentIndex = 0;
+
+    try
+    {
+    while (($line = $reader.ReadLine()) -ne $null)
+    {
+    if ($currentIndex++ -eq $index)
+    {
+    return $line;
+    }
+    }
+    }
+    finally
+    {
+    # Close $reader and $input
+    $reader.Close();
+    }
+
+    # There are less than ($index + 1) lines in the file
+    return $null;
+    }
+#>
+#GetLineAt 'file.txt' 9;
+$filepath = 'C:\Users\Velocet\OneDrive\Dokumente\WindowsPowerShell\Velocet\Scripts\Get-Excuse\excuses.txt'
+
+$file2 = [System.IO.File]::ReadLines($filepath)
+
+$file2.Dispose()
+
+$file2 # | Select-Object -Skip 1 -First 1;

@@ -1,0 +1,212 @@
+#! $Id: images.txt 281 2007-02-21 16:39:04Z adrian $
+
+#! translate I to a solid char
+#translate I 9608
+#!translate I 35
+#transparent 32
+#begin invc0 green black
+#refxy 6 3
+    IIII
+ IIIIIIIIII
+IIIIIIIIIIII
+III  II  III
+IIIIIIIIIIII
+   II  II
+  II II II
+II        II
+#end
+#begin invc1 green black
+#refxy 6 3
+    IIII
+ IIIIIIIIII
+IIIIIIIIIIII
+III  II  III
+IIIIIIIIIIII
+  III  III
+ II  II  II
+  II    II
+#end
+#begin invb0 green black
+#refxy 5 3
+  I     I
+   I   I
+  IIIIIII
+ II III II
+I IIIIIII I
+I IIIIIII I
+I I     I I
+   II II
+#end
+#begin invb1 green black
+#refxy 5 3
+  I     I
+I  I   I  I
+I IIIIIII I
+III III III
+IIIIIIIIIII
+ IIIIIIIII
+  I     I
+ I       I
+#end
+#begin inva0 green black
+#refxy 3 3
+   II
+  IIII
+ IIIIII
+II II II
+IIIIIIII
+ I II I
+I      I
+ I    I
+#end
+#begin inva1 green black
+#refxy 3 3
+   II
+  IIII
+ IIIIII
+II II II
+IIIIIIII
+  I  I
+ I II I
+I I  I I
+#end
+
+#begin base yellow black
+#refxy 5 0
+     I
+    III
+ IIIIIIIII
+IIIIIIIIIII
+IIIIIIIIIII
+IIIIIIIIIII
+#end
+#begin baseexplode0 yellow black
+#refxy 5 0
+          I
+I    I 
+  I II I I
+ III III II
+II IIIIIIII
+IIIIIIIIIII
+#end
+#begin baseexplode1 yellow black
+#refxy 5 0
+I       I
+ I  I I 
+  I II I I
+ I II II I 
+IIIII IIIII
+IIIIIIIIIII
+#end
+#begin baseblank yellow black
+#refxy 5 0
+      
+       
+          
+           
+           
+           
+#end
+#begin bomba0 red black
+#refxy 1 0
+ I
+  I
+ I
+I
+ I
+#end
+#begin bomba1 red black
+#refxy 1 0
+ I
+I  
+ I
+  I
+ I
+#end
+#begin bombb0 red black
+#refxy 1 0
+ I
+ I
+II
+ II
+ I
+#end
+#begin bombb1 red black
+#refxy 1 0
+ I
+II
+ II
+ I
+ I
+#end
+#begin missile white black
+#refxy 0 2
+I
+I
+I
+#end
+#begin mothership0 yellow black
+#refxy 7 3
+     IIIIII
+   IIIIIIIIII
+  IIIIIIIIIIII
+ II II II II II
+IIIIIIIIIIIIIIII
+  III  II  III
+   I        I
+#end
+#begin mothership1 yellow black
+#refxy 7 3
+     IIIIII
+   IIIIIIIIII
+  IIIIIIIIIIII
+  II II II II I
+IIIIIIIIIIIIIIII
+  III  II  III
+   I        I
+#end
+#begin mothership2 yellow black
+#refxy 7 3
+     IIIIII
+   IIIIIIIIII
+  IIIIIIIIIIII
+ I II II II II 
+IIIIIIIIIIIIIIII
+  III  II  III
+   I        I
+#end
+#begin invexplode green black
+#refxy 6 4
+    I   I    
+ I   I I   I 
+  I       I  
+   I     I   
+II         II
+   I     I   
+  I       I  
+ I   I I   I 
+    I   I    
+#end
+
+#begin shield0 green black
+#refxy 0 0
+IIII
+IIII
+IIII
+IIII
+#end
+#begin shield1 green black
+#refxy 0 0
+I I 
+ I I
+I I 
+ I I
+#end
+#begin shield2 green black
+#refxy 0 0
+    
+ I I
+    
+ I I
+#end
+

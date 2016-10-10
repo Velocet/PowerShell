@@ -1,0 +1,13 @@
+4 Möglichkeiten
+WIA
+DirectX
+CommandCam: https://batchloaf.wordpress.com/commandcam/
+NirSoft: http://www.nirsoft.net/utils/web_cam_image_capture.html
+
+http://www.codeproject.com/Articles/274461/Very-fast-screen-capture-using-DirectX-in-Csharp
+https://github.com/stefanstranger/PowerShell/blob/master/Get-WebCamp.ps1
+http://www.codeproject.com/Articles/15219/WebCam-Fast-Image-Capture-Service-using-WIA
+
+https://technet.microsoft.com/en-gb/library/bb742447.aspx
+http://www.groovypost.com/howto/snap-picture-log-in-save-to-dropbox/
+https://superuser.com/questions/553301/taking-a-picture-after-entering-wrong-password

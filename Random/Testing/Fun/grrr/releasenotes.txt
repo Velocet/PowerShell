@@ -1,0 +1,95 @@
+Version 1.1.0.5 | 22 Feb 2007
+
+New Features
+
+* Now 100% Cmdlet! 
+
+* Sprites now have DidOverlap handlers, called by Test-SpriteOverlap
+  cmdlet.
+
+* Movement and Drawing are distinct. Move-Sprite triggers the 
+  motion path for each sprite and also calls WillMove and DidMove
+  script handlers. Drawing calls WillDraw and DidDraw and when
+  animating, calls DidEndAnim at the end of a sequence. 
+
+  When using a motion path, DidEndMotion will called at the end
+  of each loop.
+
+* Added a "Tag" property to each sprite for easy identification
+  of sprite types (eg missile, bomb, alien) from handlers.
+
+* Can dynamically change images on sprites
+
+* DirectX, multi-channel, looping sound (needs DirectX though)
+
+* Changed 'alive' property on Sprite to 'active' 
+
+* Incorporated banner script as out-banner cmdlet.
+
+* Added 'timer' events; made keymap a generic eventmap.
+
+
+------------------------------------------------------------------
+
+Version 1,1,alpha | 9 Feb 2007
+
+New Features:
+
+* New back buffer system based on in-memory BufferCell arrays, no
+  longer needs spare buffer space.
+  SetBufferContents is slow, and this is now only done once
+  during flush-playfield.
+  Performance gains in demos range from 2 to 5 times.
+
+* Sound support with prepare-sound and play-sound
+
+* Non-opaque images. You can now specify which character is to be
+  transparent when calling create-image. draw-image will only
+  draw the non-opaque characters. Example in grrr-demo-dragon.
+
+* New demo - grrr-demo-dragon, showing transparancy and motion
+  handlers.
+
+* Image clipping. draw-image will now clip an image to the
+  playfield. Oversized back buffers are not needed. 
+
+* Sprite animation speed is now controllable. 
+  create-sprite as a -animrate param that lets you choose
+  how often a sprite's frame updates. Default is 1.
+
+* Playfield frame syncing. Nothing fancy like VBL syncing!
+  Just means that when you flush-playfield, you can specify
+  a sync time in ms, which means it will try to ensure that
+  all flushes are N ms apart, regardless of how much time
+  you spend in the game loop.
+
+* String drawing. You can now draw a string in a particular
+  colour at a specific x,y coordinate in the playfield.
+  This is just a convenient wrapper around create-image
+  and draw-image.
+
+* Can load images from a specially formatted text file
+
+* Started supporting the Soapyfrog.Grrr snap-in.
+
+
+Bugs fixed:
+
+* Lots
+
+Dropped Features:
+
+* Scolling viewport. The drawing pipeline became a bit too long
+  and slow and complex. May re-introduce it in later versions.
+
+Other:
+
+* Reorganised into lib/tests/demos directories
+
+
+------------------------------------------------------------------
+Version 0,1,alpha | 3 Jan 2007
+
+First version posted to http://ps1.soapyfrog.com/2007/01/03/grrr/
+
+Had basic concepts and some working unit tests and demos.

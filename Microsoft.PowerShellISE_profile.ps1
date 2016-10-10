@@ -1,0 +1,1 @@
+﻿$PSUser="$(Split-Path $profile)\$env:USERNAME";if(Test-Path $PSUser){. "$PSUser\PowerShellISE_profile.ps1"}
