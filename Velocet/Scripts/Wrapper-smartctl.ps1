@@ -75,11 +75,12 @@ function Get-SMART {
         HelpMessage='Device Name (eg. /dev/sda)'
     )]
     [ValidateNotNullOrEmpty()]
-    [Alias('Device','dev')]
+    [Alias('dev')]
     [string[]]$DeviceName
   )
 
   process {
+
     foreach ($Device in $DeviceName) {
 
       # Get the S.M.A.R.T values
@@ -103,7 +104,7 @@ function Get-SMART {
       foreach ($item in $Drive) {
         if ($item -Match '^\s*(\d+)\s+(\w+)\s+(\w+)\s+(\d+)\s+(\d+)\s+([\d-]+)\s+([\w-]+)\s+(\w+)\s+([\w-]+)\s+(\d+)') {
           $obj = [PSCustomObject]@{
-            'DeviceName'  = $DeviceName
+            'Device'      = $Device
             'ID'          = $matches[1]
             'Attribute'   = $matches[2]
             'Flag'        = $matches[3]
@@ -176,7 +177,7 @@ function Invoke-SMARTScan {
     $Device = $Device.Split()
     $obj = [PSCustomObject]@{
       'DeviceName' = $Device[0]
-      'DeviceType' = $Device[2]
+      'Type'       = $Device[2]
     }
     Write-Output -InputObject $obj
   } # End foreach Device
