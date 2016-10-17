@@ -7,6 +7,7 @@
 # bei installationsproblemen:
 # powershell -noprofile -command "Install-Module PowerShellGet -Force"
 # powershell -noprofile -command "Install-Module PSReadline -SkipPublisherCheck -Force"
+# In profile.ps1 hinzufügen: $PSUser=[Environment]::GetFolderPath(“MyDocuments”)+"\GitHub\PowerShell\$env:USERNAME";if(Test-Path $PSUser){. "$PSUser\profile.ps1"}
 
 if ($host.Name -eq 'ConsoleHost')
 {
