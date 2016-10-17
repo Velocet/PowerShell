@@ -1,0 +1,19 @@
+# PowerShell Console File
+profile.psc1
+
+# Windows image file caches
+Thumbs.db
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Backup/Temp files
+*.bak
+*.tmp
+
+# Office temporary
+~$*.doc*
+~$*.xls*
+*.xlk
+~$*.ppt*
+*.~vsdx
