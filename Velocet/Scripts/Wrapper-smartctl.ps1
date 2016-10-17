@@ -1,31 +1,33 @@
-#!/usr/bin/env powershell
+﻿#!/usr/bin/env powershell
+#requires -Version 3
+
 <#PSScriptInfo
     .TITLE smartctl-Wrapper
-    .VERSION 1.1.0
+    .DESCRIPTION List S.M.A.R.T values with smartctl.
+    .VERSION 1.1.1
     .GUID 0ab53c0d-988a-4e5e-aa37-6b3c021b4a7b
-    .AUTHOR Felix Niederhausen (Velocet [GitHub]), Mark Kraus (markekraus [GitHub])
+    .AUTHOR Velocet [GitHub], markekraus [GitHub]
     .COMPANYNAME
-    .COPYRIGHT Â© 2016 Felix Niederhausen, Icon by Iconic [useiconic.com]
+    .COPYRIGHT (c) 2016 Velocet, Icon by Iconic [useiconic.com]
     .TAGS smartctl smart wrapper S.M.A.R.T
     .LICENSEURI https://github.com/Velocet/PowerShell/blob/master/LICENSE
-    .PROJECTURI https://github.com/Velocet/PowerShell/
+    .PROJECTURI https://github.com/velocet/PowerShell/blob/master/Velocet/Scripts/Wrapper-smartctl.ps1
     .ICONURI https://github.com/Velocet/PowerShell/raw/master/Velocet/Scripts/Wrapper-smartctl.png
     .EXTERNALMODULEDEPENDENCIES
     .REQUIREDSCRIPTS
     .EXTERNALSCRIPTDEPENDENCIES
-    .RELEASENOTES
-    1.1.0 [2016-10-16] Merged pull request (thx Mark!)
-    1.0.0 [2016-10-10] Initial publication to reddit/r/powershell
+    .RELEASENOTES 1.1.1 [2016-10-17] [Git Sux Edition] Typos, Logo cleaned
+    1.1.0 [2016-10-16] Merged pull request, see GitHub (thx Mark!)
+    1.0.0 [2016-10-08] Initial version
     Based on: http://stackoverflow.com/a/28570708/6813931/
 #>
-#requires -Version 3
 
 function Get-SMART {
   <#
       .SYNOPSIS
       Get the S.M.A.R.T values for the given device (eg. HDD, SSD, etc.).
       .DESCRIPTION
-      Outputs the S.M.A.R.T values with the help of smartctl for the given device. For further information refer to the smartmontools homepage.
+      Output the S.M.A.R.T values with the help of smartctl for the given device. For further information refer to the smartmontools homepage.
       Could and should be used in conjunction with Invoke-SMARTScan.
       .PARAMETER DeviceName
       Specifies the name of the device to query.
@@ -33,11 +35,11 @@ function Get-SMART {
       Get-SMART /dev/sda | Format-Table
       Output the S.M.A.R.T values for /dev/sda as a nicely formatted table.
       .EXAMPLE
-      Invoke-SMARTScan | Get-SMART | ft
-      >DeviceName   ID  Attribute               Flag   Value Worst Treshold Type     Updated Failing Now Raw
-      >----------   --  ---------               ----   ----- ----- -------- ----     ------- ----------- ---
-      >/dev/sda     1   Raw_Read_Error_Rate     0x000f 166   166   006      Pre-fail Always  -           0
-      >/dev/sda     5   Reallocated_Sector_Ct   0x0032 253   100   036      Old_age  Always  -           0
+      Invoke-SMARTScan | Get-SMART | ft *
+      >DeviceName   ID  Attribute               Flag   Value Worst Treshold Type     Updated Failing Now Raw         
+      >----------   --  ---------               ----   ----- ----- -------- ----     ------- ----------- ---         
+      >/dev/sda     1   Raw_Read_Error_Rate     0x002f 100   100   002      Pre-fail Always  -           0           
+      >/dev/sda     5   Reallocated_Sector_Ct   0x0033 100   100   010      Pre-fail Always  -           0 
       >...
 
       Output the S.M.A.R.T values for all devices and prints it as a nice table.
@@ -52,8 +54,8 @@ function Get-SMART {
       Values that should be monitored if looking for failing HDDs (does not apply to SSDs) are:
 
       ID  Attribute
-      --- ---------
-      5 Reallocated Sectors Count
+      --  ---------
+      5   Reallocated Sectors Count
       187 Reported Uncorrectable Errors
       188 Command Timeout
       197 Current Pending Sector Count
@@ -75,7 +77,7 @@ function Get-SMART {
         HelpMessage='Device Name (eg. /dev/sda)'
     )]
     [ValidateNotNullOrEmpty()]
-    [Alias('dev')]
+    [Alias('Dev')]
     [string[]]$DeviceName
   )
 
@@ -93,18 +95,18 @@ function Get-SMART {
         } # Obscure other OS
       }
       catch [Management.Automation.CommandNotFoundException] {
-        Write-Error -Message 'Smartmontools not installed in the default directory!'
-        Write-Error -Message 'Install smartmontools from https://smartmontools.org/ or create a symbolic link if smartmontools is not installed in the default directory:'
-        Write-Error -Message 'PS> New-Item -ItemType SymbolicLink -Name "$env:ProgramFiles\smartmontools" -Target "PATH\TO\SMARTMONTOOLS"'
+        Write-Warning -Message 'Smartmontools not installed in the default directory!'
+        Write-Warning -Message 'Install smartmontools from https://smartmontools.org/ or create a symbolic link if smartmontools is not installed in the default directory:'
+        Write-Warning -Message 'PS> New-Item -ItemType SymbolicLink -Name "$env:ProgramFiles\smartmontools" -Target "PATH\TO\SMARTMONTOOLS"'
       } # Catch Windows Command Not Found Exception
       catch {
-        Write-Error -Message 'Smartmontools not installed or not accessible!'
+        Write-Warning -Message 'Smartmontools not installed or not accessible!'
       } # Catch Linux/macOS Command Not Found Exception
-      
+
       foreach ($item in $Drive) {
         if ($item -Match '^\s*(\d+)\s+(\w+)\s+(\w+)\s+(\d+)\s+(\d+)\s+([\d-]+)\s+([\w-]+)\s+(\w+)\s+([\w-]+)\s+(\d+)') {
           $obj = [PSCustomObject]@{
-            'Device'      = $Device
+            'DeviceName'   = $Device
             'ID'          = $matches[1]
             'Attribute'   = $matches[2]
             'Flag'        = $matches[3]
@@ -126,7 +128,7 @@ function Get-SMART {
 function Invoke-SMARTScan {
   <#
       .SYNOPSIS
-      Output all devices (drives) known to smartctl.
+      Scans for devices and prints each device name and protocol.
       .DESCRIPTION
       Output the name and type of the attached devices available to smartctl.
       .EXAMPLE
@@ -140,9 +142,9 @@ function Invoke-SMARTScan {
       Output a list of all devices with their name and type.
       .EXAMPLE
       Invoke-SMARTScan | Get-SMART | ft
-      Output the S.M.A.R.T values for all devices and print it as a nice table.
+      Output the S.M.A.R.T values for all devices as a nice table.
       .INPUTS
-      None. You cannot pipe objects to Invoke-SMARTScan.
+      None.
       .OUTPUTS
       PSObject.
       .NOTES
@@ -165,14 +167,14 @@ function Invoke-SMARTScan {
     } # Obscure other OS
   }
   catch [Management.Automation.CommandNotFoundException] {
-    Write-Error -Message 'Smartmontools not installed in the default directory!'
-    Write-Error -Message 'Install smartmontools from https://smartmontools.org/ or create a symbolic link if smartmontools is not installed in the default directory:'
-    Write-Error -Message 'PS> New-Item -ItemType SymbolicLink -Name "$env:ProgramFiles\smartmontools" -Target "PATH\TO\SMARTMONTOOLS"'
+    Write-Warning -Message 'Smartmontools not installed in the default directory!'
+    Write-Warning -Message 'Install smartmontools from https://smartmontools.org/ or create a symbolic link if smartmontools is not installed in the default directory:'
+    Write-Warning -Message 'PS> New-Item -ItemType SymbolicLink -Name "$env:ProgramFiles\smartmontools" -Target "PATH\TO\SMARTMONTOOLS"'
   } # Catch Windows Command Not Found Exception
   catch {
-    Write-Error -Message 'Smartmontools not installed or not accessible!'
+    Write-Warning -Message 'Smartmontools not installed or not accessible!'
   } # Catch Linux/macOS Command Not Found Exception
-  
+
   foreach ($Device in $Scan) {
     $Device = $Device.Split()
     $obj = [PSCustomObject]@{
