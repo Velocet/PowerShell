@@ -1,10 +1,8 @@
-<a id="markdown-[Velocet's PowerShell Repository [![GitHub release](http://img.shields.io/github/release/velocet/dotfiles.svg?maxAge=2592000)](../releases/) [![license](http://img.shields.io/github/license/velocet/dotfiles.svg?maxAge=2592000)](../LICENSE)](#velocets-powershell-repository-github-releasehttpimgshieldsiogithubreleasevelocetdotfilessvgmaxage2592000releases-licensehttpimgshieldsiogithublicensevelocetdotfilessvgmaxage2592000license)" name="[Velocet's PowerShell Repository [![GitHub release](http://img.shields.io/github/release/velocet/dotfiles.svg?maxAge=2592000)](../releases/) [![license](http://img.shields.io/github/license/velocet/dotfiles.svg?maxAge=2592000)](../LICENSE)](#velocets-powershell-repository-github-releasehttpimgshieldsiogithubreleasevelocetdotfilessvgmaxage2592000releases-licensehttpimgshieldsiogithublicensevelocetdotfilessvgmaxage2592000license)"></a>
-# Velocet's PowerShell Repository [![GitHub release](http://img.shields.io/github/release/velocet/dotfiles.svg?maxAge=2592000)](../releases/) [![license](http://img.shields.io/github/license/velocet/dotfiles.svg?maxAge=2592000)](../LICENSE)
+# Velocet's PowerShell Repository [![GitHub release](http://img.shields.io/github/release/velocet/dotfiles.svg?maxAge=2592000)](../releases/) [![GitHub issues](http://img.shields.io/github/issues-raw/velocet/dotfiles.svg?maxAge=2592000)](../issues/) [![GitHub pull request](http://img.shields.io/github/issues-pr-raw/velocet/dotfiles.svg?maxAge=2592000)](../pulls/) [![license](http://img.shields.io/github/license/velocet/dotfiles.svg?maxAge=2592000)](../LICENSE)
 
-[![GitHub issues](http://img.shields.io/github/issues-raw/velocet/dotfiles.svg?maxAge=2592000)](../issues/)
-[![GitHub pull request](http://img.shields.io/github/issues-pr-raw/velocet/dotfiles.svg?maxAge=2592000)](../pulls/)
+## **!!! THIS IS WIP! PLEASE DO NOT USE YET !!!**
 
-**vPoShRepo** is a collection of personal PoSh scripts for use in PoSh, ISE, NuGet, etc to be easily adopted by others and made to run instantly on any PC you take your script collection to.
+**vPoShRepo** is a collection of personal PoSh scripts for use in PoSh, ISE, VSCode, Visual Studio, NuGet, etc. to be easily adopted by others and made to run instantly on any PC you take your script collection to.
 
 <p align="center"><img src="profile.png"/></p>
 
@@ -17,8 +15,39 @@
 <a id="markdown-[**Features**](#features)" name="[**Features**](#features)"></a>
 ## **Features**
 
-* Punkt 1
-* Pinkt 2..
+* Ready for use with:
+  * git (PoSh-Git Integration)
+  * choco
+  * NuGet / MyGet
+* Fully portable
+  * Easy installation
+  * Easy configurable
+  * History is saved in your profile dir, perfect for use with OneDrive
+* Get-MotD Mod
+  * Uses Threads
+  * Fortune Implementation
+  * External IP Address
+  * Signal Strength when using Wi-Fi
+  * etc.
+* ISE Ready
+  * ISE Themes: Monokai, Solarized, etc.
+  * ISESteroids ready
+* Profiles for:
+  * PowerShell Console (PowerShell_profile.ps1)
+  * PowerShell ISE Host (PowerShellISE_profile.ps1)
+  * Visual Studio Code (Microsoft.VSCode_profile.ps1)
+  * Visual Studio / NuGet (NuGet_profile.ps1)
+* PSReadline Profile which holds all key handlers
+* Data File for storing Tokens, API Keys, Secrets, etc.
+* UTF-8 ready
+* 2 Line Custom Prompt with:
+  * Special Titlebar
+  * git Integration 
+  * Time
+  * Username
+  * Hostname
+  * Responsive Horizontal dividing line for better seperation between your commands
+
 
 ---
 
